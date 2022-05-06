@@ -3,34 +3,45 @@ class Universe {
         this.element = config.element;
         this.canvas = this.element.querySelector(".game-canvas");
         this.ctx = this.canvas.getContext("2d");
+        this.map = null;
+    }
+
+    startGameLoop() {
+        const step = () => {
+            this.update();
+            this.draw();
+            requestAnimationFrame(() => {
+                step();
+            });
+        }
+
+        step();
     }
 
     init() {
-        // Draw the background
-        const image = new Image();
-        image.onload = () => {
-            this.ctx.drawImage(image, 0, 0);
-        }
-        image.src = "./images/maps/DemoLower.png";
+        this.map = new UniverseMap(window.UniverseMaps.Kitchen);
 
-        // Create the player
-        const hero = new GameObject({
-            x: 5,
-            y: 6,
-            src: "./images/characters/people/hero.png",
+        this.startGameLoop();
+
+
+    }
+
+    update() {
+
+    }
+
+    draw() {
+        // Clear the canvas before each new draw
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.map.drawLower(this.ctx);
+
+        // Between the lower and upper layers, draw the game objects
+        Object.values(this.map.gameObjects).forEach(gameObject => {
+            gameObject.x += (Math.random() * 2 - 1) * 0.02;
+            gameObject.y += (Math.random() * 2 - 1) * 0.02;
+            gameObject.sprite.draw(this.ctx);
         });
 
-        // Create an npc
-        const npc1 = new GameObject({
-            x: 7,
-            y: 9,
-            src: "./images/characters/people/npc1.png",
-        });
-
-        // TODO: temporary check
-        setTimeout(() => {
-            hero.sprite.draw(this.ctx);
-            npc1.sprite.draw(this.ctx);
-        }, 100);
+        this.map.drawUpper(this.ctx);
     }
 }
