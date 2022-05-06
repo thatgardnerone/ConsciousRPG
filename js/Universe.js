@@ -13,32 +13,24 @@ class Universe {
         }
         image.src = "./images/maps/DemoLower.png";
 
-        // Draw the player
-        const x = 1;
-        const y = 2;
+        // Create the player
+        const hero = new GameObject({
+            x: 5,
+            y: 6,
+            src: "./images/characters/people/hero.png",
+        });
 
-        const shadow = new Image();
-        shadow.onload = () => {
-            this.ctx.drawImage(
-                shadow,
-                0, 0,
-                32, 32,
-                x * 16 - 7, y * 16 - 17,
-                32, 32
-            );
-        }
-        shadow.src = "./images/characters/shadow.png";
+        // Create an npc
+        const npc1 = new GameObject({
+            x: 7,
+            y: 9,
+            src: "./images/characters/people/npc1.png",
+        });
 
-        const hero = new Image();
-        hero.onload = () => {
-            this.ctx.drawImage(
-                hero,
-                0, 0,
-                32, 32,
-                x * 16 - 7, y * 16 - 18,
-                32, 32
-            );
-        }
-        hero.src = "./images/characters/people/hero.png";
+        // TODO: temporary check
+        setTimeout(() => {
+            hero.sprite.draw(this.ctx);
+            npc1.sprite.draw(this.ctx);
+        }, 100);
     }
 }
