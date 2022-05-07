@@ -19,11 +19,20 @@ class Agent extends GameObject {
         }
     }
 
-    update(state) {
-        this.updatePosition();
+    updateDirection(state) {
+        if (this.movingProgressRemaining === 0 && !state.arrow) {
+            this.sprite.setAnimation("idle-" + this.direction);
+        } else {
+            this.sprite.setAnimation("walk-" + this.direction);
+        }
+    }
 
+    update(state) {
         // TODO: for now, only the player can move
         if (!this.isPlayerControlled) return;
+
+        this.updatePosition();
+        this.updateDirection(state);
 
         // Only update the direction if the agent is not moving
         if (this.movingProgressRemaining === 0 && state.arrow) {
