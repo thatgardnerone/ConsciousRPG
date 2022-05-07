@@ -28,8 +28,9 @@ window.UniverseMaps = {
                 x: utils.withGrid(5),
                 y: utils.withGrid(6),
                 src: "./images/characters/people/hero.png",
+                isPlayerControlled: true,
             }),
-            npc1: new GameObject({
+            npc1: new Agent({
                 x: utils.withGrid(7),
                 y: utils.withGrid(9),
                 src: "./images/characters/people/npc1.png",

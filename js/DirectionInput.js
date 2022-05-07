@@ -24,7 +24,6 @@ class DirectionInput {
             const dir = this.map[ev.code];
             if (dir && !this.heldDirections.includes(dir)) {
                 this.heldDirections.unshift(dir);
-                console.log(this.heldDirections);
             }
         });
 
@@ -33,7 +32,6 @@ class DirectionInput {
             const index = this.heldDirections.indexOf(dir);
             if (index > -1) {
                 this.heldDirections.splice(index, 1);
-                console.log(this.heldDirections);
             }
         });
     }
