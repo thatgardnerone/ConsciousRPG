@@ -24,14 +24,14 @@ window.UniverseMaps = {
         lowerSrc: '/images/maps/DemoLower.png',
         upperSrc: '/images/maps/DemoUpper.png',
         gameObjects: {
-            hero: new GameObject({
-                x: 5,
-                y: 6,
+            hero: new Agent({
+                x: utils.withGrid(5),
+                y: utils.withGrid(6),
                 src: "./images/characters/people/hero.png",
             }),
             npc1: new GameObject({
-                x: 7,
-                y: 9,
+                x: utils.withGrid(7),
+                y: utils.withGrid(9),
                 src: "./images/characters/people/npc1.png",
             })
         }
@@ -41,18 +41,18 @@ window.UniverseMaps = {
         upperSrc: '/images/maps/KitchenUpper.png',
         gameObjects: {
             hero: new GameObject({
-                x: 3,
-                y: 6,
+                x: utils.withGrid(3),
+                y: utils.withGrid(6),
                 src: "./images/characters/people/hero.png",
             }),
             npcA: new GameObject({
-                x: 9,
-                y: 5,
+                x: utils.withGrid(9),
+                y: utils.withGrid(5),
                 src: "./images/characters/people/npc2.png",
             }),
             npcB: new GameObject({
-                x: 11,
-                y: 7,
+                x: utils.withGrid(11),
+                y: utils.withGrid(7),
                 src: "./images/characters/people/npc3.png",
             })
         }

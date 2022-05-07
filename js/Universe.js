@@ -8,7 +8,6 @@ class Universe {
 
     startGameLoop() {
         const step = () => {
-            this.update();
             this.draw();
             requestAnimationFrame(() => {
                 step();
@@ -19,15 +18,12 @@ class Universe {
     }
 
     init() {
-        this.map = new UniverseMap(window.UniverseMaps.Kitchen);
+        this.map = new UniverseMap(window.UniverseMaps.DemoRoom);
+
+        this.directionInput = new DirectionInput();
+        this.directionInput.init();
 
         this.startGameLoop();
-
-
-    }
-
-    update() {
-
     }
 
     draw() {
@@ -36,10 +32,11 @@ class Universe {
         this.map.drawLower(this.ctx);
 
         // Between the lower and upper layers, draw the game objects
-        Object.values(this.map.gameObjects).forEach(gameObject => {
-            gameObject.x += (Math.random() * 2 - 1) * 0.02;
-            gameObject.y += (Math.random() * 2 - 1) * 0.02;
-            gameObject.sprite.draw(this.ctx);
+        Object.values(this.map.gameObjects).forEach(object => {
+            object.update({
+                arrow: this.directionInput.direction,
+            });
+            object.sprite.draw(this.ctx);
         });
 
         this.map.drawUpper(this.ctx);
