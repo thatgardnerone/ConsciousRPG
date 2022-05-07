@@ -1,8 +1,4 @@
 class Sprite {
-    get frame() {
-        return this.animations[this.currentAnimation][this.currentAnimationStep];
-    }
-
     constructor(config) {
         // Image setup
         this.image        = new Image();
@@ -43,6 +39,10 @@ class Sprite {
         this.gameObject = config.gameObject;
     }
 
+    get frame() {
+        return this.animations[this.currentAnimation][this.currentAnimationStep];
+    }
+
     setAnimation(animation) {
         if (this.currentAnimation !== animation) {
             this.currentAnimation = animation;
@@ -62,9 +62,9 @@ class Sprite {
         this.currentAnimationStep = (this.currentAnimationStep + 1) % this.animations[this.currentAnimation].length;
     }
 
-    draw(ctx) {
-        const x = this.gameObject.x - 8;
-        const y = this.gameObject.y - 18;
+    draw(ctx, cameraTarget) {
+        const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraTarget.x;
+        const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraTarget.y;
 
         // Draw shadow
         if (this.useShadow && this.isShadowLoaded) {

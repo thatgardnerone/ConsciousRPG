@@ -10,12 +10,18 @@ class UniverseMap {
 
     }
 
-    drawLower(ctx) {
-        ctx.drawImage(this.lowerImage, 0, 0);
+    drawLower(ctx, cameraTarget) {
+        ctx.drawImage(
+            this.lowerImage,
+            utils.withGrid(10.5) - cameraTarget.x,
+            utils.withGrid(6) - cameraTarget.y);
     }
 
-    drawUpper(ctx) {
-        ctx.drawImage(this.upperImage, 0, 0);
+    drawUpper(ctx, cameraTarget) {
+        ctx.drawImage(
+            this.upperImage,
+            utils.withGrid(10.5) - cameraTarget.x,
+            utils.withGrid(6) - cameraTarget.y);
     }
 }
 

@@ -8,6 +8,7 @@ class Universe {
 
     startGameLoop() {
         const step = () => {
+            this.update();
             this.draw();
             requestAnimationFrame(() => {
                 step();
@@ -26,19 +27,31 @@ class Universe {
         this.startGameLoop();
     }
 
+    update() {
+        Object.values(this.map.gameObjects).forEach(gameObject => {
+            gameObject.update({
+                arrow: this.directionInput.direction,
+            });
+        });
+    }
+
     draw() {
         // Clear the canvas before each new draw
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.map.drawLower(this.ctx);
+
+        // Set the camera target
+        // TODO: remove hardcoded hero value
+        const cameraTarget = this.map.gameObjects.hero;
+
+        // Draw the lower map
+        this.map.drawLower(this.ctx, cameraTarget);
 
         // Between the lower and upper layers, draw the game objects
-        Object.values(this.map.gameObjects).forEach(object => {
-            object.update({
-                arrow: this.directionInput.direction,
-            });
-            object.sprite.draw(this.ctx);
+        Object.values(this.map.gameObjects).forEach(gameObject => {
+            gameObject.sprite.draw(this.ctx, cameraTarget);
         });
 
-        this.map.drawUpper(this.ctx);
+        // Draw the upper map
+        this.map.drawUpper(this.ctx, cameraTarget);
     }
 }
