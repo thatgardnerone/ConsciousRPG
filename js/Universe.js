@@ -1,9 +1,9 @@
 class Universe {
     constructor(config) {
         this.element = config.element;
-        this.canvas = this.element.querySelector(".game-canvas");
-        this.ctx = this.canvas.getContext("2d");
-        this.map = null;
+        this.canvas  = this.element.querySelector(".game-canvas");
+        this.ctx     = this.canvas.getContext("2d");
+        this.map     = null;
     }
 
     startGameLoop() {
@@ -12,7 +12,7 @@ class Universe {
             requestAnimationFrame(() => {
                 step();
             });
-        }
+        };
 
         step();
     }

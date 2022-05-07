@@ -1,14 +1,14 @@
 class Agent extends GameObject {
     constructor(config) {
         super(config);
-        this.isPlayerControlled = config.isPlayerControlled || false;
+        this.isPlayerControlled      = config.isPlayerControlled || false;
         this.movingProgressRemaining = 0;
-        this.directionUpdate = {
-            up: ['y', -1],
-            down: ['y', 1],
-            left: ['x', -1],
-            right: ['x', 1]
-        }
+        this.directionUpdate         = {
+            up:    ["y", -1],
+            down:  ["y", 1],
+            left:  ["x", -1],
+            right: ["x", 1],
+        };
     }
 
     updatePosition() {
@@ -27,7 +27,7 @@ class Agent extends GameObject {
 
         // Only update the direction if the agent is not moving
         if (this.movingProgressRemaining === 0 && state.arrow) {
-            this.direction = state.arrow;
+            this.direction               = state.arrow;
             this.movingProgressRemaining = 16;
         }
     }

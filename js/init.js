@@ -1,6 +1,6 @@
 (function () {
     const universe = new Universe({
-        element: document.querySelector(".game-container")
+        element: document.querySelector(".game-container"),
     });
 
     universe.init();
